@@ -4,18 +4,10 @@ import {Redirect} from 'react-router-dom'
 import Typography from "@material-ui/core/Typography";
 import {withRouter} from 'react-router-dom';
 import Emoji from "./Emoji";
-import { Link } from "react-router-dom";
-import Paper from '@material-ui/core/Paper';
-import Zoom from '@material-ui/core/Zoom';
-import DorImage from "../../dummyImage/DorBenLulu.jpg";
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import InfoIcon from '@material-ui/icons/Info';
-import GridListTile from "@material-ui/core/GridListTile";
-import ListSubheader from "@material-ui/core/ListSubheader";
-// import Emojify from "react-emojione";
-// const Emoji = Emojify
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { makeStyles } from '@material-ui/core/styles';
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Profile extends Component {
@@ -44,32 +36,6 @@ class Profile extends Component {
       backgroundPosition: "center",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat"
-    };
-
-    // const containerStyle = {
-    //   position: "relative",
-    //   width: '100%',
-    //   maxWidth: "100vw",
-    //   overflow: "hidden",
-    //   height: "40vh"
-    // };
-
-
-    // const imageStyle = {
-    //   maxWidth: "100%",
-    //   maxHeight: "100%",
-    //   position: "absolute",
-    //   top: "0",
-    //   bottom: "0",
-    //   margin: "auto",
-    //   width: "100%"
-    // };
-
-    const imageStyle = {
-      display: "block",
-      width: "100%",
-      height: "auto",
-      marginTop: '-20%'
     };
 
     const overlayStyle = {
@@ -103,13 +69,7 @@ class Profile extends Component {
     }
     return (
       <div>
-        {/* <div style={containerStyle}>
-          
-              <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
-            
-        </div> */}
         <div style={containerStyle}>
-          {/* <img src={`${user ? user.picture : null }`} alt="Avatar" style={imageStyle}/> */}
           <div style={overlayStyle} onClick={() => this.props.history.goBack()}><ArrowBackIcon style={{color: "black"}} /></div>
         </div>
         {user ? 
@@ -130,4 +90,5 @@ class Profile extends Component {
     );
   }
 }
+
 export default withRouter(Profile);
