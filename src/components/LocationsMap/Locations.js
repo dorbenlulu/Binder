@@ -1,19 +1,7 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
-import image from "../dummyImage/dummyMap.PNG";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { withRouter } from "react-router-dom";
-import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from "@material-ui/icons/Info";
 @inject(
   "generalStore",
   "user",

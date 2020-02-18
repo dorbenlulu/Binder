@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
 import { Route, Link } from "react-router-dom"
-import Locations from "../Locations"
-import MapContainer from "../MapContainer"
+import Locations from "../LocationsMap/Locations"
+import MapContainer from "../LocationsMap/MapContainer"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';

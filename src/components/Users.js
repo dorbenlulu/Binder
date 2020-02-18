@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
 import { withRouter } from 'react-router-dom';
-import { Link } from "react-router-dom";
-import User from "./User";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
-import RaisedButton from 'material-ui/RaisedButton';
-import EmptyProfilePicture from "../../dummyImage/Empty.jpg"
-// import tileData from "./tileData";
+import EmptyProfilePicture from "../dummyImage/Empty.jpg"
 
 @inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
