@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { observer, inject } from "mobx-react";
-// import { Link } from "react-router-dom";
 import axios from 'axios';
-// 
-
-const apiKey = process.env.API_KEY
+// const apiKey = process.env.API_KEY
 
 const mapStyles = {
   map: {
@@ -19,8 +16,6 @@ const mapStyles = {
 
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
-
-
 class CurrentLocation extends React.Component {
 
     constructor(props) {
@@ -61,7 +56,7 @@ class CurrentLocation extends React.Component {
         if (this.props.centerAroundCurrentLocation) {
           if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition( pos => {
-              // c  onst coords = pos.coords;
+              // const coords = pos.coords;
               const coords = { //don't accept this change! this is for vicki's computer, and uncomment the line above
                 latitude: 32.0628992,
                 longitude: 34.7736213
@@ -74,8 +69,7 @@ class CurrentLocation extends React.Component {
                   lat: coords.latitude,
                   lng: coords.longitude
                 }
-              }, function(){
-                
+              }, function() {     
                 this.props.socketStore.getLocationsNearby(this.state.currentLocation)
               })
             })
@@ -93,37 +87,20 @@ class CurrentLocation extends React.Component {
           console.log(error);
         });
       }
-      // getLocations=async (coordinates)=>{
-      //   const response = await axios.get(`/maps/api/place/nearbysearch/json?location=${coordinates.lat},${coordinates.lng}&radius=100&type=bar&key=${apiKey}`);
-        
-      //   console.log(response)
-      //   let places=[]
-      //   places=response.data.results.map(item=> item.name)
-      //   console.log(places)
-      // }
-
       loadMap() {
         if (this.props && this.props.google) {
           // checks if google is available
           const { google } = this.props;
           const maps = google.maps;
-    
           const mapRef = this.refs.map;
     
           // reference to the actual DOM element
           const node = ReactDOM.findDOMNode(mapRef);
-    
           let { zoom } = this.props;
           const { lat, lng } = this.state.currentLocation;
           const center = new maps.LatLng(lat, lng);
-          const mapConfig = Object.assign(
-            {},
-            {
-              center: center,
-              zoom: zoom
-            }
-          );
-    
+          const mapConfig = Object.assign({},{ center, zoom });
+
           // maps.Map() is constructor that instantiates the map
           this.map = new maps.Map(node, mapConfig);
         }
@@ -131,7 +108,9 @@ class CurrentLocation extends React.Component {
 
       renderChildren() {
         const { children } = this.props;
-        if (!children) return;
+        if (!children) { 
+          return;
+        }
     
         return React.Children.map(children, c => {
           if (!c) return;
