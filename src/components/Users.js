@@ -8,6 +8,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import EmptyProfilePicture from "../dummyImage/Empty.jpg"
+import Footer from './Footer'
 
 @inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
@@ -79,6 +80,7 @@ class Users extends Component {
         
     
         </div>
+        <Footer />
       </>
     );
   }

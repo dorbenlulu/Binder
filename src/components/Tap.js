@@ -31,7 +31,6 @@ class Tap extends Component {
 
   render() {
     const classes = this.useStyles();
-
     return (
       <div>
         <Emojify

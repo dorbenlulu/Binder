@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { observer, inject } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,23 +19,7 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from "@material-ui/icons/Notifications";
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     flexGrow: 1
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(2)
-//   },
-//   title: {
-//     flexGrow: 1
-//   },
-//   list: {
-//     width: 250
-//   },
-//   fullList: {
-//     width: "auto"
-//   }
-// }));
+
 @inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Header extends Component {
@@ -52,166 +36,101 @@ class Header extends Component {
     ) {
       return;
     }
-    this.setState({left: open})
-    // setLeft(open);
+    this.setState({ left: open })
   };
+
   uploadImage = (event) => {
     // make a POST request!
   }
+
   sideList = side => {
-    const classes = this.useStyles() 
+    const classes = this.useStyles()
     const loggedInUser = this.props.socketStore.loggedInUser
     return (
-    <div
-      className={classes.list}
-      role="presentation"
-      onClick={this.toggleDrawer(side, false)}
-      onKeyDown={this.toggleDrawer(side, false)}
-    >
-      <List>
-        <ListItem
-          button
-          onClick={() => {
-            this.toggleDrawer(side, false);
-          }}
-        >
-          <ListItemIcon>
-            <ArrowBackIosIcon />
-          </ListItemIcon>
-          <ListItemText primary="Back" />
-        </ListItem>
-        <ListItem>
-          <label for="image">
-            <input type="file" name="image" id="image" style={{display:"none"}} onChange={this.uploadImage} />
-          <img
-            src={loggedInUser ? loggedInUser.picture : EmptyProfilePicture}
-            style={{ width: "30vw", height: "30vw", paddingLeft: "5vw" }}
-          />
-          </label>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <PermIdentityIcon />
-          </ListItemIcon>
-          <Link to="/editProfile"><ListItemText primary={"Edit Profile"} /></Link>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <Link to="/settings"><ListItemText primary={"Settings"} /></Link>
-        </ListItem>
-       <ListItem button onClick={this.initializeCounter}>
-          <ListItemIcon>
-            {
-              this.props.socketStore.notificationsAmt > 0
-                ? <Badge badgeContent={this.props.socketStore.notificationsAmt} color="primary"> <NotificationsIcon />
+      <div
+        className={classes.list}
+        role="presentation"
+        onClick={this.toggleDrawer(side, false)}
+        onKeyDown={this.toggleDrawer(side, false)}
+      >
+        <List>
+          <ListItem
+            button
+            onClick={() => {
+              this.toggleDrawer(side, false);
+            }}
+          >
+            <ListItemIcon>
+              <ArrowBackIosIcon />
+            </ListItemIcon>
+            <ListItemText primary="Back" />
+          </ListItem>
+          <ListItem>
+            <label for="image">
+              <input type="file" name="image" id="image" style={{ display: "none" }} onChange={this.uploadImage} />
+              <img src={loggedInUser ? loggedInUser.picture : EmptyProfilePicture} style={{ width: "30vw", height: "30vw", paddingLeft: "5vw" }} />
+            </label>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <PermIdentityIcon />
+            </ListItemIcon>
+            <Link to="/editProfile"><ListItemText primary={"Edit Profile"} /></Link>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <Link to="/settings"><ListItemText primary={"Settings"} /></Link>
+          </ListItem>
+          <ListItem button onClick={this.initializeCounter}>
+            <ListItemIcon>
+              {
+                this.props.socketStore.notificationsAmt > 0
+                  ? <Badge badgeContent={this.props.socketStore.notificationsAmt} color="primary"> <NotificationsIcon />
                   </Badge>
-                : <Badge badgeContent={0} color="primary"> <NotificationsIcon />
-                </Badge>
-            }
-          </ListItemIcon>
-          <Link to="/notifications"> <ListItemText primary={'Notifications'} /> </Link>
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <Link to="/"><ListItemText primary={"Back"} /></Link>
-        </ListItem>
-      </List>
-      <Divider />
-    </div>
-  )
-}
+                  : <Badge badgeContent={0} color="primary"> <NotificationsIcon />
+                  </Badge>
+              }
+            </ListItemIcon>
+            <Link to="/notifications"> <ListItemText primary={'Notifications'} /> </Link>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <Link to="/"><ListItemText primary={"Back"} /></Link>
+          </ListItem>
+        </List>
+        <Divider />
+      </div>
+    )
+  }
   useStyles = () => {
     return makeStyles(theme => ({
-    root: {
-      flexGrow: 1
-    },
-    menuButton: {
-      marginRight: theme.spacing(2)
-    },
-    title: {
-      flexGrow: 1
-    },
-    list: {
-      width: 250
-    },
-    fullList: {
-      width: "auto"
-    }
-  }))}
+      root: {
+        flexGrow: 1
+      },
+      menuButton: {
+        marginRight: theme.spacing(2)
+      },
+      title: {
+        flexGrow: 1
+      },
+      list: {
+        width: 250
+      },
+      fullList: {
+        width: "auto"
+      }
+    }))
+  }
   render() {
     const classes = this.useStyles();
-    // const [left, setLeft] = React.useState(false);
-    // const toggleDrawer = (side, open) => event => {
-    //   if (
-    //     event.type === "keydown" &&
-    //     (event.key === "Tab" || event.key === "Shift")
-    //   ) {
-    //     return;
-    //   }
-    //   setLeft(open);
-    // };
-    // const sideList = side => (
-    //   <div
-    //     className={classes.list}
-    //     role="presentation"
-    //     onClick={toggleDrawer(side, false)}
-    //     onKeyDown={toggleDrawer(side, false)}
-    //   >
-    //     <List>
-    //       <ListItem
-    //         button
-    //         onClick={() => {
-    //           toggleDrawer(side, false);
-    //         }}
-    //       >
-    //         <ListItemIcon>
-    //           <ArrowBackIosIcon />
-    //         </ListItemIcon>
-    //         <ListItemText primary="Back" />
-    //       </ListItem>
-    //       <ListItem>
-    //         <img
-    //           src={EmptyProfilePicture}
-    //           style={{ width: "30vw", height: "30vw", paddingLeft: "13vw" }}
-    //         />
-    //       </ListItem>
-    //       <ListItem button>
-    //         <ListItemIcon>
-    //           <PermIdentityIcon />
-    //         </ListItemIcon>
-    //         <Link to="/editProfile"><ListItemText primary={"Edit Profile"} /></Link>
-    //       </ListItem>
-    //       <ListItem button>
-    //         <ListItemIcon>
-    //           <SettingsIcon />
-    //         </ListItemIcon>
-    //         <Link to="/settings"><ListItemText primary={"Settings"} /></Link>
-    //       </ListItem>
-    //       <ListItem button>
-    //         <ListItemIcon>
-    //           <Badge badgeContent={4} color="primary">
-    //               <NotificationsIcon />
-    //           </Badge>
-    //         </ListItemIcon>
-    //         <Link to="/notifications"><ListItemText primary={"Notifications"} /></Link>
-    //       </ListItem>
-    //       <ListItem button>
-    //         <ListItemIcon>
-    //           <SettingsIcon />
-    //         </ListItemIcon>
-    //         <Link to="/"><ListItemText primary={"Back"} /></Link>
-    //       </ListItem>
-    //     </List>
-    //     <Divider />
-    //   </div>
-    // );
     const appBarStyle = {
       backgroundColor: "#e91e63"
     };
+
     return (
       <div className={classes.root}>
         <AppBar position="static" style={appBarStyle}>
@@ -222,7 +141,6 @@ class Header extends Component {
               color="inherit"
               aria-label="menu"
             >
-              {/* {this.props.generalStore.displayMenu ? <img src={this.props.socketStore.loggedInUser.picture} style={{height: "2vh", weight: "2vw", borderRadius:"50px"}} onClick={this.toggleDrawer("left", true)} /> : null} */}
               {this.props.generalStore.displayMenu ? <MenuIcon onClick={this.toggleDrawer("left", true)} /> : null}
               <Drawer open={this.state.left} onClose={this.toggleDrawer("left", false)}>
                 {console.log("state.left is ", this.state.left)}
@@ -238,46 +156,5 @@ class Header extends Component {
     );
   }
 }
-// const sideList = side => (
-//     <div
-//       className={classes.list}
-//       role="presentation"
-//       onClick={toggleDrawer(side, false)}
-//       onKeyDown={toggleDrawer(side, false)}
-//     >
-//       <List>
-//         <ListItem
-//           button
-//           onClick={() => {
-//             console.log("Want to close!");
-//             toggleDrawer(side, false);
-//           }}
-//         >
-//           <ListItemIcon>
-//             <ArrowBackIosIcon />
-//           </ListItemIcon>
-//           <ListItemText primary="Back" />
-//         </ListItem>
-//         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-//           <ListItem button key={text}>
-//             <ListItemIcon>
-//               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-//             </ListItemIcon>
-//             <ListItemText primary={text} />
-//           </ListItem>
-//         ))}
-//       </List>
-//       <Divider />
-//       <List>
-//         {["All mail", "Trash", "Spam"].map((text, index) => (
-//           <ListItem button key={text}>
-//             <ListItemIcon>
-//               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-//             </ListItemIcon>
-//             <ListItemText primary={text} />
-//           </ListItem>
-//         ))}
-//       </List>
-//     </div>
-//   );
+
 export default Header
