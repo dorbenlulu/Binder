@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Input, InputBase } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
-import { StylesProvider, InputLabel } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import { MenuItem } from 'material-ui';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+
 @inject("generalStore","user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
-
 class FormUserDetails extends Component {
-    // constructor(){
-    //     super();
-    //     this.state = {
-    //     }
-    // }
+
     continue = async event => {
         event.preventDefault()
-        
         let emailAddress={address: this.props.values.email}
         let checkEmail= await axios.post('http://localhost:8080/checkEmail', emailAddress )
         if(checkEmail.data=="exists"){
@@ -30,6 +22,7 @@ class FormUserDetails extends Component {
             this.props.nextStep()
         }
     }
+    
     componentDidMount() {
         this.props.generalStore.setHeaderLabel("Enter User Details")
     }
@@ -40,7 +33,6 @@ class FormUserDetails extends Component {
             <div style={{marginLeft: "14vw"}}>
             <MuiThemeProvider>
                 <React.Fragment>
-                    {/* <AppBar title="Enter User Details" /> */}
                     <TextField
                         // placeholder="Enter Your First Name"
                         floatingLabelText="First Name"

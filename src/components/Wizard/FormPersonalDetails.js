@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { StylesProvider, InputLabel, Input } from '@material-ui/core';
 import { MenuItem } from 'material-ui';
@@ -14,9 +12,9 @@ import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
 import {storage} from '../../config/fireBaseConfig'
 import Button from '@material-ui/core/Button';
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
-
 class FormPersonalDetails extends Component {
     state = {
         Men: false,
@@ -58,19 +56,13 @@ class FormPersonalDetails extends Component {
                     this.setState({
                         url
                     }, function(){
-                    // console.log(this.state.url)
                     this.props.handleChange('picture')(this.state.url)
                     })
                 })
             })
         }
-        // const abc = await axios.post("gs://binder-1579608819026.appspot.com/", this.state.selectedFile)
-        // console.log(abc)
     }
 
-    // componentDidMount() {
-    //     this.props.generalStore.setHeaderLabel("Enter User Details")
-    // }
     render() {
             
             const { values, handleChange, upload } = this.props
@@ -83,8 +75,6 @@ class FormPersonalDetails extends Component {
                 <div style={divStyle}>
                 <MuiThemeProvider>
                     <React.Fragment>
-                        {/* <AppBar title="Enter User Details" /> */}
-
                         <InputLabel id="desired-relationship-label">What Are You Looking For?</InputLabel>
                         <Select labelId="desired-relationship-label" label="What Are You Looking For?"
                             hintText="Enter Your Desdired Relationship"
