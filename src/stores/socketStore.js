@@ -5,9 +5,9 @@ import fireBaseConfig from '../config/fireBaseConfig.js'
 
 export class SocketStore {
     endpoint = "localhost:8080"
-    socket = socketIOClient()
+    socket = socketIOClient(this.endpoint)
     watchID
-    //need to empty parantheses before deploying to heroku!!!
+    //need to empty socketIOClient parantheses before deploying to heroku!!!
     @observable socketId = "";
     @observable coordinates = {}
     @observable nearbyLocations = []
@@ -51,8 +51,12 @@ export class SocketStore {
     }
 
     @action getUsersNearMe = (location) => {
-        console.log('before emit location: ' + location)
-        this.socket.emit('selectedLocation', location);
+        console.log('before emit location??????: ' + location)
+        const data = {user:this.loggedInUser, selectedLocation:location}
+        console.log('before emit data: ' + data)
+
+        this.socket.emit('selectedLocation', data);
+
         this.socket.on('usersNearMe', (usersNearMe) => {
             console.log('usersNearMe: ' + usersNearMe)
             this.nearbyUsers = usersNearMe

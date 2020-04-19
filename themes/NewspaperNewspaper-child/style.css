@@ -1,0 +1,279 @@
+/*
+Theme Name: Newspaper Child
+Theme URI: http://tagdiv.com
+Template: Newspaper/Newspaper
+Author: tagDiv
+Author URI: http://themeforest.net/user/tagDiv/portfolio
+Description: Premium WordPress template, clean and easy to use.
+Tags: black,white,one-column,two-columns,fixed-layout
+Version: 9.7.4.1564734007
+Updated: 2019-08-02 08:20:07
+
+*/
+@import url('../Newspaper/Newspaper/style.css');
+
+.td-main-page-wrap
+{
+	padding-bottom: 48px !important;
+}
+.shopammzom > .wpb_wrapper {
+    border: 1px solid #eee;
+}
+.shopammzom .wpb_wrapper.vc_figure {
+    height: 100%;
+    min-height: 149px;
+    padding-top: 25px;
+}
+.amazonshopnow {
+    margin-bottom: 0;
+}
+.shopammzom > .wpb_wrapper {
+    border: 1px solid #eee;
+    margin-bottom: 30px;
+}
+.amezonlist-middle .vc_single_image-img {
+    max-width: 61px;
+}
+.amezonlist-middle .wpb_text_column.wpb_content_element {
+    margin-bottom: 9px;
+}
+.amezonlist-middle h2.vc_custom_heading {
+    margin-top: 0;
+    margin-bottom: 11px;
+}
+.amezonlist-middle p {
+    font-size: 12px;
+}
+.amezonlist-last .wpb_single_image {
+    margin-bottom: 3px;
+}
+.amezonshoin .tdc-row:last-child {
+    border-bottom: 1px solid #d0d0d0;
+}
+.amezonshoin .tdc-row {
+    border-top: 1px solid #d0d0d0;
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    padding: 15px 0px;
+}
+.vc_section.amezonshoin {
+    margin-bottom: 40px;
+}
+.amezonlist-first .wpb_single_image {
+    margin-bottom: 0;
+}
+.amezonlist-middle .wpb_single_image {
+    margin-bottom: 0;
+    padding-top: 6px;
+}
+.amezonlist-last .vc_general.vc_btn3.vc_btn3-size-lg {
+    font-size: 13px;
+    padding: 13px 29px;
+}
+.Companieslinks-in .vc_single_image-img {
+    max-width: 124px;
+    height: 100%;
+    max-height: 75px;
+    width: auto;
+}
+.Companieslinks {
+    max-width: 700px;
+    margin: 0px auto;
+}
+.Companieslinks-in .wpb_single_image {
+    margin-bottom: 0;  
+}
+.Companieslinks-in p strong {
+    font-size: 15px;
+    padding-top: 17px;
+    display: block;
+}
+.Companieslinks-in:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+.Companieslinks-in {
+    padding: 6px 0px;
+}
+.minimalist_avr_score {
+    margin-bottom: 0;
+}
+.minimalist_avr_score h4 , .editor_overall_score h4{
+    font-size: 25px;
+}
+.pros > .wpb_wrapper {
+    background: #eee;
+    padding: 15px;
+}
+.pros h3.vc_custom_heading {
+    margin-top: 2px;
+}
+.pros ul li {
+    font-size: 12px;
+}
+.pros ul li h6{
+    font-size: 14px;
+}
+.pros ul li h6 {
+    font-size: 14px;
+    margin-top: 10px;
+}
+.pros .wpb_text_column.wpb_content_element {
+    margin-bottom: 0;
+}
+.pros > .wpb_wrapper {
+    background: #eee;
+    padding: 15px;
+    min-height: 203px;
+    margin-bottom: 30px;
+}
+.td-fix-index svg {
+    stroke-width: 0px;
+    fill-opacity: 1;
+    stroke: rgb(237, 21, 102);
+    stroke-opacity: 1;
+    fill: rgb(2, 155, 126);
+}
+#theTable tr td {
+    padding: 11px 10px;
+}
+#theTable tr th {
+    font-size: 17px;
+    padding: 10px;
+}
+.vc_custom_heading.minimalist_avr_score {
+    font-size: 25px;
+}
+.minimalist_avr_score strong {
+    color: #3d9be9;
+}
+.minimal-barefoot_button .wpb_single_image {
+    margin-bottom: 0;
+}
+.minimal-barefoot_button .vc_general.vc_btn3 {
+    font-size: 13px;
+    padding: 13px 29px;
+    border-radius: 50px;
+}
+.minimal-barefoot-image {
+    margin-bottom: 0;
+}
+.shoes-manufactures-directory .tdc-row {
+    border-bottom: 1px solid #535353;
+    margin-bottom: 20px;
+}
+.manufactureswill p {
+    width: 100%;
+    display: block;
+    min-height: 582px;
+}   
+#comp-ixf7u5r4iframe {
+    width: 100% !important;
+    overflow: auto;
+    border-right: 3px solid;
+    border-bottom: 3px solid;
+}
+.wpcf7-form .wpcf7-form-control-wrap {
+    display: block;
+}
+body input[type="text"], body input[type="url"], body input[type="tel"], body input[type="email"] {
+    height: 45px;
+}
+/*#comments {
+    display: none;
+}*/
+#commentform #url {
+    display: none;
+}
+
+@media(max-width:767px) {
+
+.td_block_wrap .td-big-grid-scroll .td_module_mx6 {
+	float: left !important;
+	width: 100% !important;
+	margin: 0 !important;
+	padding-bottom: 2px;
+}	 
+	 
+.td-footer-bottom-full .block-title {
+	margin-bottom: 8px;
+}
+
+.td-footer-bottom-full .td-pb-row > div {
+	margin-bottom: 15px !important;
+}	 
+
+.td-container.td-footer-bottom-full {
+	padding-bottom: 0 !important;
+}
+	 
+h1, h2, h3, h4, h5, h6 {
+	font-size: 20px;
+	line-height: 25px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+	 
+body {
+	font-size: 12px;
+}
+
+body .td-menu-background {
+    background: linear-gradient(to bottom, #313b45 0%, #3393b8 100%) !important;
+}
+
+.td-main-page-wrap {
+	padding-bottom: 0px !important;
+}
+.td-big-grid-wrapper.td-posts-5 .td-big-grid-scroll .td_module_mx25 {
+	width: 100% !important;
+	float: left !important;
+	margin: 0 !important;
+}
+.td-mobile-container .td-menu-login-section {
+	display: none;
+}
+	 
+.manufactureswill p #comp-ixf7u5r4iframe {
+	min-width: 100% !important;
+} 
+
+.Companieslinks .Companieslinks-in .td-pb-span4 {
+	width: 33%;
+	display: inline-block;
+}
+
+.Companieslinks-in .vc_single_image-img {
+	max-width: 100%;
+	height: 100%;
+	max-height: 50px;
+	width: auto;
+}
+
+.amezonshoin .tdc-row {
+	padding: 15px;
+}
+.Companieslinks-in p strong {
+	font-size: 10px;
+}
+
+.Companieslinks .td-pb-span12 .td-pb-row {
+	padding: 6px;
+}
+
+.manufactureswill p {
+	min-height: 550px;
+}
+
+ }
+
+@media(min-width:768px) and (max-width:1024px){
+ 
+.manufactureswill p {
+	min-height: 550px;
+}
+.manufactureswill p #comp-ixf7u5r4iframe {
+	min-width: 100% !important;
+	position: relative !important;
+}
+
+}	

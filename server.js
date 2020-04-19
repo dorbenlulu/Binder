@@ -19,6 +19,7 @@ const PORT = 8080
 
 
 const users = []
+const onlineLocations = {}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,8 +34,7 @@ io.on('connection', function (socket) {
     socket.on('userId', (user) => {
         user.socketId = socket.id
         users.push(user)
-        console.log(user.firstName)
-        users.forEach(u=>console.log('user name: '+u.firstName))
+        console.log('New user in online: ', user.firstName)
     })
 
     socket.on('GPSlocation', async (GPSlocation) => {
@@ -43,28 +43,31 @@ io.on('connection', function (socket) {
         socket.emit(`locationsArry`, places);
     })
 
-    socket.on('selectedLocation', (selectedLocation) => {
-        console.log('Selected location received: ' + selectedLocation)
+    socket.on('selectedLocation', (data) => {
+        console.log('Selected location received: ' + data.selectedLocation)
         let usersNearUser = []
         let newUser = {}
-        users.forEach(u => {
-            if (u.location === selectedLocation) {
-                usersNearUser.push(u)
-            }
-            if (u.socketId === socket.id) {
-                u.location = selectedLocation
-                newUser = u
-            }
-        })
+        // onlineLocations[data.selectedLocation][data.user.socketId] 
+        // console.log(onlineLocations)
+        console.log("data.user",data.user)
+        // users.forEach(u => {
+        //     if (u.location === selectedLocation) {
+        //         usersNearUser.push(u)
+        //     }
+        //     if (u.socketId === socket.id) {
+        //         u.location = selectedLocation
+        //         newUser = u
+        //     }
+        // })
 
-        socket.emit(`usersNearMe`, usersNearUser)
-        usersNearUser.push(newUser)
-        console.log('newUser is ', newUser.firstName);
+        // socket.emit(`usersNearMe`, usersNearUser)
+        // usersNearUser.push(newUser)
+        // console.log('newUser is ', newUser.firstName);
 
-        for (let i = 0; i < usersNearUser.length - 1; i++) {
-            const usersToSend = [...usersNearUser.filter(user => user.socketId != usersNearUser[i].socketId)]
-            io.to(`${usersNearUser[i].socketId}`).emit('usersNearMe', usersToSend);
-        }
+        // for (let i = 0; i < usersNearUser.length - 1; i++) {
+        //     const usersToSend = [...usersNearUser.filter(user => user.socketId != usersNearUser[i].socketId)]
+        //     io.to(`${usersNearUser[i].socketId}`).emit('usersNearMe', usersToSend);
+        // }
     })
 
 socket.on('GPSlocation', async (GPSlocation) => {
