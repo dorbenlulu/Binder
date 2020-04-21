@@ -35,11 +35,12 @@ export class SocketStore {
     }
 
     @action openSocket =  (userToSend) => {
-        console.log("opensocket")
-        console.log(userToSend)
-        console.log("opensocket")
+    
         this.socket.emit('userId', userToSend)
-        this.loggedInUser = userToSend
+        this.socket.on('socketId', (socketId) => {
+            userToSend.socketId = socketId
+            this.loggedInUser = userToSend
+        })
         
     }
 
@@ -51,14 +52,19 @@ export class SocketStore {
     }
 
     @action getUsersNearMe = (location) => {
+        const data = {user: this.loggedInUser, selectedLocation: location }
         console.log('before emit location: ' + location)
-        this.socket.emit('selectedLocation', location);
-        this.socket.on('usersNearMe', (usersNearMe) => {
-            console.log('usersNearMe: ' + usersNearMe)
-            this.nearbyUsers = usersNearMe
+        this.socket.emit('selectedLocation', data);
+
+        this.socket.on('nearbyUsers', (nearbyUsers) => {
+            console.log('nearbyUsers: ' + nearbyUsers)
+            delete nearbyUsers[this.loggedInUser.socketId]
+            this.nearbyUsers = nearbyUsers
             this.chosenLocation = location
         })
+
     }
+    
     @action sendReaction = (reactionObj) => {
         this.socket.emit('reaction', reactionObj)
         console.log('reaction obj: '+ reactionObj.destinationUser._id)

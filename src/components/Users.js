@@ -47,28 +47,35 @@ class Users extends Component {
       <>
         <div className={classes.root} style={divStyle}>
           <GridList cellHeight={180} className={classes.gridList}>
-            {nearbyUsers.map((user, index) => (
-              <GridListTile
-                key={user.firstName}
-                onClick={() => this.props.history.push(`/user/${user._id}`)}
-              >
-                {console.log("user url is ", user.picture)}
-                {user.picture !== null ? 
-                  <img src={user.picture} alt={user.firstName} />
-                   : 
-                  <img src={EmptyProfilePicture} alt={user.firstName} />
-                }
-                <GridListTileBar
-                  style={{ height: "auto" }}
-                  title={`${user.firstName}, ${user.age}`}
-                  actionIcon={
-                    <IconButton aria-label={`info about ${user.firstName}`} className={classes.icon} >
-                      <InfoIcon />
-                    </IconButton>
+            {Object.keys(nearbyUsers).map((key, index) => (
+              
+             // if(!nearbyUsers[key]._id == this.props.socketStore.loggedInUse ){ 
+      
+                <GridListTile
+                  key={nearbyUsers[key].firstName}
+                  onClick={() => this.props.history.push(`/user/${nearbyUsers[key]._id}`)}
+                >
+                  {console.log("user url is ", nearbyUsers[key].picture)}
+                  {nearbyUsers[key].picture !== null ? 
+                    <img src={nearbyUsers[key].picture} alt={nearbyUsers[key].firstName} />
+                    : 
+                    <img src={EmptyProfilePicture} alt={nearbyUsers[key].firstName} />
                   }
-                />
-              </GridListTile>
-            ))}
+                  <GridListTileBar
+                    style={{ height: "auto" }}
+                    title={`${nearbyUsers[key].firstName}, ${nearbyUsers[key].age}`}
+                    actionIcon={
+                      <IconButton aria-label={`info about ${nearbyUsers[key].firstName}`} className={classes.icon} >
+                        <InfoIcon />
+                      </IconButton>
+                    }
+                  />
+                </GridListTile>
+                
+              //    }
+                )
+              )
+            }
           </GridList>
         </div>
         <Footer />
