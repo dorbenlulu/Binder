@@ -37,15 +37,16 @@ io.on('connection', function (socket) {
         users.push(user)
         console.log(user.firstName)
         users.forEach(u=>console.log('user name: '+u.firstName))
+        
         socket.emit(`socketId`, socket.id);
 
     })
 
-    socket.on('GPSlocation', async (GPSlocation) => {
-        const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
-        let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id, locationCoordinates: itemName.geometry.location }))
-        socket.emit(`locationsArry`, places);
-    })
+    // socket.on('GPSlocation', async (GPSlocation) => {
+    //     const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
+    //     let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id, locationCoordinates: itemName.geometry.location }))
+    //     socket.emit(`locationsArry`, places);
+    // })
 
     socket.on('selectedLocation', (data) => {
         let nearbyUsers = []
@@ -88,24 +89,33 @@ io.on('connection', function (socket) {
     })
 
 socket.on('GPSlocation', async (GPSlocation) => {
+
     const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
     let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id, locationCoordinates: itemName.geometry.location }))
     let pictures=[]
-    for(let i=0 ; i<nearLocations.data.results.length; i++){
-       if(nearLocations.data.results[i].photos){
-        let photoCode= nearLocations.data.results[i].photos[0].photo_reference
-        const photoLocation = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoCode}&key=AIzaSyBKizswmWAb46dJxdiVPZp1zpUjDxC55lM`);
-        delete photoLocation.data
-        pictures.push(photoLocation.request.res.responseUrl)
-       }
-       else{
-        pictures.push("https://images.squarespace-cdn.com/content/v1/53eba4e8e4b0d8c733bbd45a/1413767586813-7KBCWBJ538XXVKJ2DKXF/ke17ZwdGBToddI8pDm48kAR7vG2QfD3uW0H7YLf9VaYUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcT3f5-rKIYluIX58xa6tfcBn_TXvNu7kmrqqSJvyZGOaDbqGgO06TDcYHqFgl4xk9/BAR.jpg")
-       }
-    }
-        for(let i=0; i<places.length; i++){
-            places[i].picture=pictures[i]
+
+    try{
+        for(let i=0 ; i<nearLocations.data.results.length; i++){
+        if(nearLocations.data.results[i].photos){
+            let photoCode= nearLocations.data.results[i].photos[0].photo_reference
+
+            
+            const photoLocation = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoCode}&key=AIzaSyBKizswmWAb46dJxdiVPZp1zpUjDxC55lM`);
+            delete photoLocation.data
+
+            pictures.push(photoLocation.request.res.responseUrl)
         }
-    
+        else{
+            pictures.push("https://images.squarespace-cdn.com/content/v1/53eba4e8e4b0d8c733bbd45a/1413767586813-7KBCWBJ538XXVKJ2DKXF/ke17ZwdGBToddI8pDm48kAR7vG2QfD3uW0H7YLf9VaYUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcT3f5-rKIYluIX58xa6tfcBn_TXvNu7kmrqqSJvyZGOaDbqGgO06TDcYHqFgl4xk9/BAR.jpg")
+        }
+        }
+            for(let i=0; i<places.length; i++){
+                places[i].picture=pictures[i]
+            }
+    }catch(e){
+        console.log('error in getting location pictures:',e)
+    }
+
     socket.emit(`locationsArry`, places);
 
 })
@@ -138,18 +148,11 @@ socket.on('GPSlocation', async (GPSlocation) => {
         // }
     })
 
-    socket.on('out of range', function () {
-        let location
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].socketId === socket.id) {
-                location = users[i].location
-                users[i].location = ""
-                console.log(`checking out user ${users[i].userId} from ${location}`)
-            }
-        }
-        for (let i = 0; i < users.length; i++) {
-            const usersToSend = [...users.filter(user => user.socketId != users[i].socketId && user.location == location)]
-            io.to(`${users[i].socketId}`).emit('usersNearMe', usersToSend);
+    socket.on('out of range', function (location) {
+        console.log(`checking out user ${locations[location][socket.id].firstName}`)
+        delete locations[location][socket.id]
+        for (const key in locations[location]) {
+            io.to(`${key}`).emit('nearbyUsers', locations[location]);
         }
     })
 
