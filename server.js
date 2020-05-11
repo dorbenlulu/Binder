@@ -141,7 +141,7 @@ io.on('connection', function (socket) {
             console.log('from location:', socketUser.location)
 
             delete locations[socketUser.location][socketUser.socketId]
-            
+
             for (const key in locations[socketUser.location]) {
                 io.to(`${key}`).emit('nearbyUsers', locations[socketUser.location]);
             }
