@@ -26,7 +26,7 @@ To Visit the App client:
 
 Open the site in another incognito page.
 
-RECOMENDED: View the screen in moblie display.
+RECOMMENDED: View the screen in moblie display.
 To do so, press `cntrl + shift + J`, and then `cntrl + shift + M`
 
 In the second terminal, run `node server`  
